@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input id="input" type="text">
+    <button id="btn">提交</button>
+
+    <script>
+
+        /*
+        *   @param  string类型，传入输入的字符串
+        *   @return boolean，正确返回true
+        */
+
+        function pinyinRegex(str){
+            str = str.replace(/\s/g,"")
+            let regexOneLen = /^([a]|[e]|[o])$/;
+            let regexTwoLen = /^([a][ion]|[b][aiou]|[c][aeiu]|[d][aeiu]|[e][i]|[f][aou]|[g][aeu]|[h][aeu]|[j][iu]|[k][aeu][l][aeiouv]|[m][aeiou]|[n][aeiuv]|[o][u]|[p][aoiu]|[q][iu]|[r][eiu]|[s][aeiu]|[t][aeiu]|[w][aou]|[x][aiu]|[y][aeiou]|[z][aeiu])$/
+            let regexThiLen = /^([a][n][g]|[b][a][ino]|[b][e][in]|[b][i][n]|[c][a][io]|[c][h][aeiu]|[c][e][n]|[c][u][ino]|[c][o][u]|[d][a][ino]|[d][eu][in]|[d][i][e]|[d][o][u]|[e][n][g]|[f][a][n]|[f][e][in]|[f][o][u]|[g][a][ino]|[g][e][in]|[g][o][u]|[g][u][aino]|[h][a][ino]|[h][e][in]|[h][o][u]|[h][u][aino]|[j][i][aenu]|[j][u][en]|[k][a][ino]|[k][e][in]|[k][o][u]|[k][u][aoin]|[l][a][ino]|[l][e][i]|[l][i][enu]|[l][o][u]|[l][u][eno]|[m][a][ino]|[m][e][in]|[m][i][enu]|[m][o][u]|[n][a][ino]|[n][e][in]|[n][i][enu]|[n][o][u]|[n][u][eno]|[p][a][ino]|[p][e][in]|[p][i][en]|[p][o][u]|[q][i][aenuen]|[r][a][no]|[r][e][n]|[r][u][o]|[r][u][oni]|[s][a][oin]|[s][e][n]|[s][h][aeiu]|[s][u][oin]|[s][o][u]|[t][a][ino]|[t][i][e]|[t][o][u]|[t][u][ino]|[w][a][in]|[w][e][in]|[x][i][aenu]|[x][u][en]|[y][a][no]|[y][i][n]|[y][o][u]|[y][u][en]|[z][a][ino]|[z][e][in]|[z][h][aiu]|[z][o][u]|[z][u][ino])$/                                                                                                                                                                                                                                                 
+            let regexFourLen = /^([b][ae][n][g]|[b][i][a][no]|[b][i][n][g]|[cghklnrstz][aeo][n][g]|[c][h][a][ino]|[c][h][e][n]|[c][h][o][u]|[c][h][u][ino]|[cdghjklnqrstxyz][u][a][n]|[d][aeoi][n][g]|[d][i][a][on]|[f][ae][n][g]|[ghk][u][a][i]|[j][i][a][no]|[j][i][n][g]|[l][i][a][no]|[l][i][n][g]|[m][aei][n][g]|[m][i][a][on]|[n][i][a][no]|[n][i][n][g]|[p][oei][n][g]|[p][i][a][no]|[q][i][a][on]|[q][i][n][g]|[s][h][au][nio]|[s][h][e][n]|[s][h][o][u]|[t][i][n][g]|[t][i][a][on]|[w][ae][n][g]|[x][i][n][g]|[x][i][a][on]|[y][aio][n][g]|[z][h][a][ino]|[z][h][e][n]|[z][h][o][u]|[z][h][u][aoni])$/
+            let regFiveLen = /^([csz][h][u][a][i]|[c][h][aeo][n][g]|[c][h][u][a][n]|[gh][u][a][n][g]|[j][i][ao][n][g]|[k][u][a][n][g]|[ln][i][a][n][g]|[q][i][ao][n][g]|[s][h][ae][n][g]|[s][h][u][a][ni]|[x][i][ao][n][g]|[z][h][aeo][n][g]|[z][h][u][a][n])$/
+            let regSixLen = /^([csz][h][u][a][n][g])$/;
+            switch (str.length) {
+                case 1:
+                    return regexOneLen.test(str.toLowerCase());
+                    break;
+                case 2:
+                    return regexTwoLen.test(str.toLowerCase());
+                    break;
+                case 3:
+                    return regexThiLen.test(str.toLowerCase());
+                    break;
+                case 4:
+                    return regexFourLen.test(str.toLowerCase());
+                    break;
+                case 5:
+                    return regFiveLen.test(str.toLowerCase());
+                    break;
+                case 6:
+                    return regSixLen.test(str.toLowerCase());
+            }
+        }
+
+        document.getElementById('btn').onclick = function(){
+            let text = document.getElementById('input').value;
+            if(!text) return alert('空的！')
+            pinyinRegex(text)?alert('正确的拼音'):alert('错误的拼音')
+        }
+    </script>
+</body>
+</html>
+
+
